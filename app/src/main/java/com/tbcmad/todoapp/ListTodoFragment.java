@@ -75,11 +75,12 @@ public class ListTodoFragment extends Fragment {
     }
 
     private class TodoHolder extends RecyclerView.ViewHolder{
-        TextView title, date;
+        TextView title, date,desc;
         public TodoHolder(LayoutInflater inflater, ViewGroup parent){
             super(inflater.inflate(R.layout.list_item_todo, parent, false));
             title = itemView.findViewById(R.id.list_item_tv_title);
             date = itemView.findViewById(R.id.list_item_tv_date);
+            desc = itemView.findViewById(R.id.list_item_tv_desc);
 
             title.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -88,6 +89,12 @@ public class ListTodoFragment extends Fragment {
                 }
             });
             date.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    loadUpdateItem();
+                }
+            });
+            desc.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     loadUpdateItem();
@@ -108,6 +115,7 @@ public class ListTodoFragment extends Fragment {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             title.setText(todo.getTitle());
             date.setText(sdf.format(todo.getTodoDate()));
+            desc.setText(todo.getDescription());
         }
     }
 
